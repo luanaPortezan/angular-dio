@@ -19,6 +19,7 @@ class CardNews extends HTMLElement {
 
     const linkTitle = document.createElement('a');
     linkTitle.textContent = this.getAttribute('title')
+    linkTitle.href = this.getAttribute('link-url');
 
     const newsContent = document.createElement('p');
     newsContent.textContent = this.getAttribute('content');
@@ -29,8 +30,10 @@ class CardNews extends HTMLElement {
 
     const cardRight = document.createElement('div');
     cardRight.setAttribute('class','card-right');
-    const newsImage = document.createElement('img');
 
+    const newsImage = document.createElement('img');
+    newsImage.src = this.getAttribute('photo') || 'assets/default-avatar.png';
+    newsImage.alt = 'Imagem default';
     cardRight.appendChild(newsImage);
 
     componentRoot.appendChild(cardLeft);
