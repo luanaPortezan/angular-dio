@@ -159,3 +159,118 @@ function callToPhone(phone:number | string): number | string {
 async function getDataBase(id:number): Promise<number | string> {
   return 'Portezan';
 }
+
+/*------------------------ INTERFACES -------------------------*/
+
+// interfaces (type vs interface)
+
+// mais recomendado para definir a forma de uma variável, constante, e estrutura de objetos
+type robot = {
+  readonly id: number | string,
+  name: string,
+};
+
+// mais recomendado para de classes (molde para alguma coisa) - contrato!!
+interface robot2 {
+  readonly id: number | string,
+  name: string,
+  sayHello(): string,
+};
+
+const bot1: robot = {
+  id: 1,
+  name: 'Portezan',
+};
+
+const bot2: robot2 = {
+  id: 1,
+  name: 'Portezan',
+  sayHello: function (): string {
+    throw new Error("Function not implemented.");
+  }
+};
+
+// console.log(bot1);
+// console.log(bot2);
+
+class Pessoa implements robot2 {
+  id: number | string;
+  name: string;
+
+  constructor(id: number | string, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+  sayHello(): string {
+    return `Olá, meu nome é ${this.name}`;
+  }
+}
+
+const p = new Pessoa(3, 'Alice');
+// console.log(p.sayHello());
+
+
+/*------------------------ CLASSES -------------------------*/
+
+class Character {
+  private name?: string
+  protected strength: number;
+  public skill: number;
+
+  constructor(name: string, strength: number, skill: number) {
+    this.name = name;
+    this.strength = strength;
+    this.skill = skill;
+  }
+
+  public  attack(): void { // é void para não irá retornar nada para as outras funções
+    // console.log(`Attack with ${this.strength} points!`);
+  }
+}
+
+const p1 = new Character('', 10, 98);
+p1.attack(); // This will work now
+
+/*------------------- MODIFICADORES DE ACESSO -------------------*/
+
+/*Data Modifiers
+public: acessível por qualquer classe
+private: acessível apenas pela classe que o define
+protected: acessível pela classe que o define e suas subclasses
+
+obs: também pode ser usado em construtores e métodos
+*/
+
+/*------------------- SUBCLASSES -------------------*/
+
+// Character: superclass
+// Magician: subclass
+class Magician extends Character {
+  magicPoints: number;
+
+  constructor(
+    name: string, 
+    strength: number, 
+    skill: number,
+    magicPoints: number
+    ) {
+    super(name, strength, skill); // chama o construtor da classe pai (Character)
+      this.magicPoints = magicPoints;
+  }
+}
+
+const p2 = new Magician('Mago', 9, 30, 100);
+
+
+/*------------------- GENERICS -------------------*/
+function concatArray<T>(...itens: T[]): T[] {
+  return new Array().concat(...itens);
+}
+
+const numArray = concatArray<number[]>([1, 5], [3]);
+const stgArray = concatArray<string[]>(['Portezan', 'Ana'], ['Alice']);
+
+// numArray.push(1); // não é recomendado, SE o retorno da função é any
+
+// console.log(numArray);
+// console.log(stgArray);

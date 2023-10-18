@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 function printaObjetos(pessoa) {
     // console.log(pessoa);
 }
@@ -104,4 +113,80 @@ let soma2 = addNumber(1, 2).toString(); // não é recomendado, pois o retorno d
 function addToHello(name) {
     return `Hello ${name}`;
 }
-console.log(addToHello('Portezan'));
+// console.log(addToHello('Portezan'));
+// funções com multi tipos
+function callToPhone(phone) {
+    return `Ligando para o número ${phone}`;
+}
+// console.log(callToPhone(61999999999));
+// funções assíncronas
+function getDataBase(id) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return 'Portezan';
+    });
+}
+;
+const bot1 = {
+    id: 1,
+    name: 'Portezan',
+};
+const bot2 = {
+    id: 1,
+    name: 'Portezan',
+    sayHello: function () {
+        throw new Error("Function not implemented.");
+    }
+};
+// console.log(bot1);
+// console.log(bot2);
+class Pessoa {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+    sayHello() {
+        return `Olá, meu nome é ${this.name}`;
+    }
+}
+const p = new Pessoa(3, 'Alice');
+// console.log(p.sayHello());
+/*------------------------ CLASSES -------------------------*/
+class Character {
+    constructor(name, strength, skill) {
+        this.name = name;
+        this.strength = strength;
+        this.skill = skill;
+    }
+    attack() {
+        // console.log(`Attack with ${this.strength} points!`);
+    }
+}
+const p1 = new Character('', 10, 98);
+p1.attack(); // This will work now
+/*------------------- MODIFICADORES DE ACESSO -------------------*/
+/*Data Modifiers
+public: acessível por qualquer classe
+private: acessível apenas pela classe que o define
+protected: acessível pela classe que o define e suas subclasses
+
+obs: também pode ser usado em construtores e métodos
+*/
+/*------------------- SUBCLASSES -------------------*/
+// Character: superclass
+// Magician: subclass
+class Magician extends Character {
+    constructor(name, strength, skill, magicPoints) {
+        super(name, strength, skill); // chama o construtor da classe pai (Character)
+        this.magicPoints = magicPoints;
+    }
+}
+const p2 = new Magician('Mago', 9, 30, 100);
+/*------------------- GENERICS -------------------*/
+function concatArray(...itens) {
+    return new Array().concat(...itens);
+}
+const numArray = concatArray([1, 5], [3]);
+const stgArray = concatArray(['Portezan', 'Ana'], ['Alice']);
+// numArray.push(1); // não é recomendado, SE o retorno da função é any
+// console.log(numArray);
+// console.log(stgArray);
