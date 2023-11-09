@@ -203,5 +203,22 @@ function exibirNome(target) {
 let Funcionario = class Funcionario {
 };
 Funcionario = __decorate([
-    exibirNome
+    exibirNome // um gatilho em cima da minha class
 ], Funcionario);
+let Quincas = class Quincas {
+};
+Quincas = __decorate([
+    exibirNome
+], Quincas);
+function apiVersion(version) {
+    return (target) => {
+        Object.assign(target.prototype, { __version: version });
+    };
+}
+let Api = class Api {
+};
+Api = __decorate([
+    apiVersion('1.10')
+], Api);
+const api = new Api();
+console.log(api.__version);

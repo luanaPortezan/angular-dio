@@ -281,7 +281,7 @@ function exibirNome(target: any) {
   console.log(target);
 }
 
-@exibirNome
+@exibirNome // um gatilho em cima da minha class para ela executar alguma ação
 class Funcionario {}
 
 @exibirNome
@@ -289,7 +289,7 @@ class Quincas {}
 
 function apiVersion(version: string) {
   return (target:any) => {
-    Object.assign(target.prototype, {__version: version});
+    Object.assign(target.prototype, {__version: version, __name: 'Luana'});
   }
 }
 
@@ -298,3 +298,4 @@ class Api {}
 
 const api = new Api();
 console.log(api.__version);
+console.log(api.__name);
